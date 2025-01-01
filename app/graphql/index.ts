@@ -1,11 +1,11 @@
-// graphql.ts
 import { GraphQLClient, gql } from "graphql-request";
-import { ProductsResponse } from "@/app/types/Product";
+import { Product } from "@/app/types/Product";
 
 const URL = process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
 const graphqlAPI = new GraphQLClient(URL as string);
 
-export const fetchProducts = async (): Promise<ProductsResponse> => {
+// Fetch all products
+export const fetchProducts = async (): Promise<Product[]> => {
   const query = gql`
     query MyQuery {
       products {
@@ -19,19 +19,47 @@ export const fetchProducts = async (): Promise<ProductsResponse> => {
         quality
         size
         dimensions
-            image {
-      url
-    }
+        image {
+          url
+        }
       }
     }
   `;
   try {
-    const result = await graphqlAPI.request<{ products: ProductsResponse }>(
-      query
-    );
-    return result.products; // Ensure this matches ProductsResponse
+    const result = await graphqlAPI.request<{ products: Product[] }>(query);
+    return result.products;
   } catch (error) {
     console.error("Error fetching products", error);
-    return []; // Return an empty array in case of failure
+    return [];
   }
 };
+
+export const fetchProductById = async (id: string): Promise<Product | null> => {
+    const query = gql`
+      query MyQuery($id: ID!) {
+        product(where: { id: $id }) {
+          name
+          id
+          price
+          brand
+          color {
+            hex
+          }
+          size
+          dimensions
+          image {
+            url
+          }
+        }
+      }
+    `;
+    try {
+      const result = await graphqlAPI.request<{ product: Product }>(query, {
+        id,
+      });
+      return result.product;
+    } catch (error) {
+      console.error(`Error fetching product with ID: ${id}`, error);
+      return null;
+    }
+  };
