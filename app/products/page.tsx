@@ -1,12 +1,26 @@
-import React from 'react'
-import AllProducts from './AllProducts'
+import React from "react";
+import AllProducts from "./AllProducts";
+import Navbar from "../components/navbar/Navbar";
+import MobileHero from "../components/mobile/MobileHero";
+import MobileNav from "../components/navbar/MobileNav";
 
-const page = () => {
+const Page = () => {
   return (
     <div>
-        <AllProducts />
-    </div>
-  )
-}
+      {/* Navbar for Desktop */}
+      <div className="hidden lg:block">
+        <Navbar />
+      </div>
 
-export default page
+      {/* MobileNav for Mobile */}
+      <div className="block lg:hidden">
+        <MobileNav />
+      </div>
+
+      {/* Content */}
+      <AllProducts />
+    </div>
+  );
+};
+
+export default Page;

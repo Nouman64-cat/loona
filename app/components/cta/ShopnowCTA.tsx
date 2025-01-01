@@ -6,7 +6,7 @@ const ShopnowCTA = () => {
   return (
     <div className="flex w-full justify-center">
       <Link href="/products">
-        <button className="flex gap-3 text-white px-10 py-4 rounded-full border-2 font-mochiy">
+        <button className="flex gap-3 text-white px-10 py-4 rounded-full border-2 font-mochiy hover:bg-white hover:text-heading hover:scale-105 transition duration-300">
           <HiOutlineShoppingCart size={28} />
           Shop Now
         </button>

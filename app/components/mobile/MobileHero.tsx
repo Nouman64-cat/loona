@@ -37,9 +37,11 @@ const MobileHero: React.FC = () => {
       {/* Top Navigation */}
       <div className="flex justify-between items-center w-full px-6 py-6 bg-gradient-to-r from-peach to-purple">
         {/* Logo */}
-        <div className="flex items-center">
-          <span className="font-mochiy text-white text-xl">Loona</span>
-        </div>
+        <Link href="/">
+          <div className="flex items-center">
+            <span className="font-mochiy text-white text-xl">Loona</span>
+          </div>
+        </Link>
 
         {/* Icons */}
         <div className="flex items-center space-x-4 text-white">
@@ -90,7 +92,7 @@ const MobileHero: React.FC = () => {
 
       {/* Shop Now Button */}
       <Link href="/products">
-        <button className="mt-6 px-8 py-3 flex items-center gap-3 text-white font-work_sans border-2 border-white rounded-full hover:bg-white hover:text-gradient-peach-purple transition">
+        <button className="mt-6 px-8 py-3 flex items-center gap-3 text-white font-work_sans border-2 border-white rounded-full transition duration-300 hover:bg-white hover:text-heading hover:scale-105">
           <HiOutlineShoppingCart size={24} />
           Shop Now
         </button>

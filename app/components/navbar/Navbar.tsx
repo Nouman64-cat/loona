@@ -4,6 +4,7 @@ import { FiSearch } from "react-icons/fi";
 import { HiOutlineHome } from "react-icons/hi";
 import { RiShoppingBagLine } from "react-icons/ri";
 import logo from "@/public/loona-white-logo.svg";
+import Link from "next/link";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -17,9 +18,11 @@ const Navbar: React.FC = () => {
     <nav className="bg-gradient-to-r from-peach to-purple py-4">
       <div className=" flex justify-between px-14 items-center">
         {/* Logo */}
-        <div className="flex items-center gap-3">
-          <Image src={logo} alt="Loona Logo" width={100} height={100} />
-        </div>
+        <Link href="/">
+          <div className="flex items-center gap-3">
+            <Image src={logo} alt="Loona Logo" width={100} height={100} />
+          </div>
+        </Link>
 
         {/* Navigation Links */}
         <ul className="hidden md:flex space-x-8 font-mochiy text-white">
@@ -34,8 +37,10 @@ const Navbar: React.FC = () => {
 
         {/* Right Icons */}
         <div className="flex items-center space-x-6 text-white">
-          <FiSearch size={24} className="hover:text-gray-200 transition" />
-          <HiOutlineHome size={24} className="hover:text-gray-200 transition" />
+          <Link href="/products">
+            <FiSearch size={24} className="hover:text-gray-200 transition" />
+          </Link>
+          {/* <HiOutlineHome size={24} className="hover:text-gray-200 transition" /> */}
           <RiShoppingBagLine
             size={24}
             className="hover:text-gray-200 transition"
