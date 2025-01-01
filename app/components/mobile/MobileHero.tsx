@@ -10,6 +10,7 @@ import x from "@/public/x-icon.svg";
 import tiktok from "@/public/tiktok-icon.svg";
 import instagram from "@/public/instagram-icon.svg";
 import hero from "@/public/loona-hero-image.svg";
+import Link from "next/link";
 
 const socialMediaLinks = [
   { name: "X", href: "https://twitter.com", icon: x },
@@ -88,10 +89,12 @@ const MobileHero: React.FC = () => {
       </div>
 
       {/* Shop Now Button */}
-      <button className="mt-6 px-8 py-3 flex items-center gap-3 text-white font-work_sans border-2 border-white rounded-full hover:bg-white hover:text-gradient-peach-purple transition">
-        <HiOutlineShoppingCart size={24} />
-        Shop Now
-      </button>
+      <Link href="/products">
+        <button className="mt-6 px-8 py-3 flex items-center gap-3 text-white font-work_sans border-2 border-white rounded-full hover:bg-white hover:text-gradient-peach-purple transition">
+          <HiOutlineShoppingCart size={24} />
+          Shop Now
+        </button>
+      </Link>
 
       {/* Social Media Icons */}
       <div className="flex items-center justify-center mt-20 space-x-6">

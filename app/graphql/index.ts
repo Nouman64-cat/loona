@@ -19,6 +19,9 @@ export const fetchProducts = async (): Promise<ProductsResponse> => {
         quality
         size
         dimensions
+            image {
+      url
+    }
       }
     }
   `;

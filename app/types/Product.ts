@@ -9,6 +9,10 @@ export type Product = {
     quality: string;
     size: number;
     dimensions: string;
+    image: {
+      url: string; // URL of the product image
+    };
   };
   
-export type ProductsResponse = Product[];
+  export type ProductsResponse = Product[];
+  
