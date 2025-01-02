@@ -1,16 +1,21 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { fetchProductById } from "@/app/graphql"; // Import your fetch function
+import { fetchProductById } from "@/app/graphql";
 import { Product } from "@/app/types/Product";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Navbar from "@/app/components/navbar/Navbar";
 import MobileNav from "@/app/components/navbar/MobileNav";
+import Footer from "@/app/components/footer/Footer";
+import ProductImageMagnifier from "../ProductImageMagnifier";
+import { HiArrowLeft } from "react-icons/hi"; // Import a back arrow icon
 
 const ProductPage = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const { id } = useParams();
+  const router = useRouter();
+
   useEffect(() => {
     const fetchProduct = async () => {
       setLoading(true);
@@ -27,6 +32,10 @@ const ProductPage = () => {
     fetchProduct();
   }, [id]);
 
+  const handleBackClick = () => {
+    router.push("/products"); // Navigate back to the products page
+  };
+
   if (loading) {
     return <p className="text-center font-work_sans">Loading...</p>;
   }
@@ -36,7 +45,7 @@ const ProductPage = () => {
   }
 
   return (
-    <div className="">
+    <div>
       {/* Navbar for Desktop */}
       <div className="hidden lg:block">
         <Navbar />
@@ -46,24 +55,35 @@ const ProductPage = () => {
       <div className="block lg:hidden">
         <MobileNav />
       </div>
+
+        {/* Back Button */}
+        <button
+          onClick={handleBackClick}
+          className="flex items-center gap-2 text-heading hover:scale-105 transition-transform duration-300 ease-in-out mt-5 mb-5 ml-2"
+        >
+          <HiArrowLeft size={20} />
+          Back to Products
+        </button>
       <div className="px-10 py-5">
-        <h1 className="text-3xl font-mochiy text-heading mb-6">{product.name}</h1>
-        <img
-            src={product.image.url}
-            alt={product.name}
-            className="w-full h-96 object-cover rounded-lg mb-6"
-        />
+
+        {/* Product Details */}
+        <h1 className="text-3xl font-mochiy text-heading mb-6">
+          {product.name}
+        </h1>
+        <ProductImageMagnifier imageUrl={product.image.url} />
+
         <div className="text-lg font-work_sans space-y-2">
-            <p>Brand: {product.brand}</p>
-            <p>Price: ${product.price}</p>
-            <p>Size: {product.size}</p>
-            <p>Dimensions: {product.dimensions}</p>
-            <div
+          <p>Brand: {product.brand}</p>
+          <p>Price: ${product.price}</p>
+          <p>Size: {product.size}</p>
+          <p>Dimensions: {product.dimensions}</p>
+          <div
             className="w-8 h-8 rounded-full"
             style={{ backgroundColor: product.color.hex }}
-            ></div>
+          ></div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
