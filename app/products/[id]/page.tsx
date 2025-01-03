@@ -9,6 +9,9 @@ import MobileNav from "@/app/components/navbar/MobileNav";
 import Footer from "@/app/components/footer/Footer";
 import ProductImageMagnifier from "../ProductImageMagnifier";
 import { HiArrowLeft } from "react-icons/hi"; // Import a back arrow icon
+import Loader from "@/app/components/loader/Loader";
+import { FaShoppingCart } from "react-icons/fa";
+import Link from "next/link";
 
 const ProductPage = () => {
   const [product, setProduct] = useState<Product | null>(null);
@@ -37,7 +40,7 @@ const ProductPage = () => {
   };
 
   if (loading) {
-    return <p className="text-center font-work_sans">Loading...</p>;
+    return <Loader />;
   }
 
   if (!product) {
@@ -56,16 +59,15 @@ const ProductPage = () => {
         <MobileNav />
       </div>
 
-        {/* Back Button */}
-        <button
-          onClick={handleBackClick}
-          className="flex items-center gap-2 text-heading hover:scale-105 transition-transform duration-300 ease-in-out mt-5 mb-5 ml-2"
-        >
-          <HiArrowLeft size={20} />
-          Back to Products
-        </button>
+      {/* Back Button */}
+      <button
+        onClick={handleBackClick}
+        className="flex items-center gap-2 text-heading hover:scale-105 transition-transform duration-300 ease-in-out mt-5 mb-5 ml-2"
+      >
+        <HiArrowLeft size={20} />
+        Back to Products
+      </button>
       <div className="px-10 py-5">
-
         {/* Product Details */}
         <h1 className="text-3xl font-mochiy text-heading mb-6">
           {product.name}
@@ -83,6 +85,14 @@ const ProductPage = () => {
           ></div>
         </div>
       </div>
+      <Link href={`/purchase/${id}`}>
+        <div className="flex w-full justify-center">
+          <button className="flex items-center justify-center gap-3 bg-gradient-to-r from-peach to-purple text-white font-inter py-3 px-10 rounded-md shadow-md hover:scale-105 transition-transform duration-300 ease-in-out">
+            <FaShoppingCart size={20} />
+            <span>Purchase Now</span>
+          </button>
+        </div>
+      </Link>
       <Footer />
     </div>
   );

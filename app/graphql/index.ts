@@ -35,6 +35,10 @@ export const fetchProducts = async (): Promise<Product[]> => {
 };
 
 export const fetchProductById = async (id: string): Promise<Product | null> => {
+  if (!id) {
+    console.error("Invalid ID provided for fetchProductById");
+    return null;
+  }
     const query = gql`
       query MyQuery($id: ID!) {
         product(where: { id: $id }) {

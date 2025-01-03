@@ -6,7 +6,7 @@ import { Product } from "@/app/types/Product"; // Import Product type
 import SearchBar from "../search-and-filter/SearchBar";
 import Footer from "../components/footer/Footer";
 import ProductCard from "./ProductCard";
-
+import Loader from "../components/loader/Loader";
 
 const AllProducts = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -48,7 +48,7 @@ const AllProducts = () => {
         <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
         {loading ? (
-          <p className="text-center font-work_sans text-heading">Loading...</p>
+          <Loader /> // Use the Loader component here
         ) : filteredProducts.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {filteredProducts.map((product) => (
