@@ -36,8 +36,11 @@ const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = ({ onSubmit }) =
 
   return (
     <div>
+        <div className="px-6">
+            <h2 className="text-xl font-mochiy text-heading">Enter Details</h2>
+            <OrderConfirmationGuide />
+        </div>
       <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-xl font-mochiy text-heading mb-4">Enter Details</h2>
 
         <div>
           <label htmlFor="name" className="block text-heading font-work_sans mb-2">
@@ -81,7 +84,7 @@ const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = ({ onSubmit }) =
           />
         </div>
 
-        <OrderConfirmationGuide />
+        
 
         <div>
           <label htmlFor="paymentMethod" className="block text-heading font-work_sans mb-2">
