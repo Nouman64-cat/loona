@@ -5,6 +5,7 @@ import OrderConfirmationGuide from "@/app/components/guide/OrderConfirmationGuid
 import { HiCheckCircle } from "react-icons/hi"; // Icon for the tick
 import { useRouter } from "next/navigation"; // For navigation
 import { BsCart } from "react-icons/bs";
+import { supabase } from "@/app/lib/supabaseClient";
 
 interface PersonalDetailsFormProps {
   onSubmit: (details: {
@@ -23,11 +24,41 @@ const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = ({ onSubmit }) =
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal visibility state
   const router = useRouter(); // Router instance
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit({ name, address, phone, paymentMethod });
-    setIsModalOpen(true); // Show modal on form submission
+  
+    // Validate the form fields (optional, to avoid empty inputs)
+    if (!name || !address || !phone) {
+      alert("All fields are required!");
+      return;
+    }
+  
+    try {
+      // Insert the data into the "personal_details" table
+      const { data, error } = await supabase.from("personal_details").insert([
+        {
+          name,
+          address,
+          phone,
+          payment_method: paymentMethod,
+        },
+      ]);
+  
+      if (error) {
+        console.error("Error saving details to database:", error);
+        alert("An error occurred while saving your details. Please try again.");
+        return;
+      }
+  
+      console.log("Details saved successfully:", data);
+      setIsModalOpen(true); // Show modal on successful submission
+      onSubmit({ name, address, phone, paymentMethod }); // Trigger parent onSubmit callback
+    } catch (error) {
+      console.error("Unexpected error during submission:", error);
+      alert("An unexpected error occurred. Please try again.");
+    }
   };
+  
 
   const handleContinueShopping = () => {
     setIsModalOpen(false); // Close the modal
