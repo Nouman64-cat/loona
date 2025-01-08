@@ -14,9 +14,12 @@ interface PersonalDetailsFormProps {
     phone: string;
     paymentMethod: string;
   }) => void;
+  product_name: string;
+  product_price: number;
+  product_brand: string;
 }
 
-const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = ({ onSubmit }) => {
+const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = ({ onSubmit, product_name, product_price, product_brand }) => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
@@ -41,6 +44,9 @@ const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = ({ onSubmit }) =
           address,
           phone,
           payment_method: paymentMethod,
+          product_name,
+          product_price,
+          product_brand
         },
       ]);
   

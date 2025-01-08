@@ -33,7 +33,12 @@ const PurchasePage = () => {
     fetchProduct();
   }, [id]);
 
-  const handleFormSubmit = (details: { name: string; address: string; phone: string }) => {
+  const handleFormSubmit = (details: {
+    name: string;
+    address: string;
+    phone: string;
+    paymentMethod: string;
+  }) => {
     console.log("User Details:", details);
   };
 
@@ -67,7 +72,7 @@ const PurchasePage = () => {
         <p className="mt-4">Price: ${product?.price}</p>
         <p>Brand: {product?.brand}</p>
       </div>
-      <PersonalDetailsForm onSubmit={handleFormSubmit} />
+      <PersonalDetailsForm onSubmit={handleFormSubmit} product_name={product.name} product_price={product.price} product_brand={product.brand} />
       <Footer />
     </div>
   );
